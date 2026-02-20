@@ -1,11 +1,7 @@
-const http = require("http");
-const port = process.env.PORT || 3000;
+const express = require("express");
+const app = express();
 
-http.createServer((req, res) => {
- if (req.url === "/api/me") {
- res.writeHead(200, { "content-type": "application/json" });
- return res.end(JSON.stringify({ ok: true }));
- }
- res.writeHead(200, { "content-type": "text/plain" });
- res.end("API running");
-}).listen(port, "0.0.0.0");
+app.get("/api/me", (req, res) => res.json({ ok: true }));
+
+const port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0");
